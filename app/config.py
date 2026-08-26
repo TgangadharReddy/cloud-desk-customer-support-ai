@@ -60,6 +60,7 @@ class Settings:
     vector_metadata_path: Path
 
     embedding_model: str
+    embedding_dimension: int
 
     top_k_results: int
     min_retrieval_score: float
@@ -84,8 +85,10 @@ def load_settings() -> Settings:
             os.getenv("VECTOR_METADATA_PATH", "vector_store/faq_metadata.pkl")
         ),
         embedding_model=os.getenv(
-            "EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2"
+            "EMBEDDING_MODEL", "gemini-embedding-001"
+
         ),
+        embedding_dimension=_get_int("EMBEDDING_DIMENSION", 768),
         top_k_results=_get_int("TOP_K_RESULTS", 3),
         min_retrieval_score=_get_float("MIN_RETRIEVAL_SCORE", 0.40),
         confidence_threshold=_get_float("CONFIDENCE_THRESHOLD", 0.70),

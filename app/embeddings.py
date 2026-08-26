@@ -1,20 +1,9 @@
 """
-Embedding model wrapper.
+Gemini embedding wrapper.
 
-Turns FAQ documents and customer queries into dense vectors using a
-Sentence Transformer model. Both FAQs (at index-build time) and customer
-queries (at search time) MUST use this same function, or their vectors
-would live in different spaces and similarity scores would be meaningless.
-
-Where this sits in the RAG pipeline:
-
-    FAQ text / Customer query
-            |
-            v
-    SentenceTransformer.encode()   <-- this module
-            |
-            v
-    Normalized embedding vector (compared via FAISS in app/rag.py)
+Uses Google's Gemini Embedding API instead of loading a local
+Sentence Transformer model. This keeps the application lightweight
+enough for low-memory deployment environments such as Render Free.
 """
 
 import logging
@@ -22,7 +11,8 @@ from functools import lru_cache
 from typing import List
 
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from google import genai
+from google.genai import types
 
 from app.config import settings
 
@@ -30,47 +20,54 @@ logger = logging.getLogger(__name__)
 
 
 @lru_cache(maxsize=1)
-def get_embedding_model() -> SentenceTransformer:
-    """
-    Load the Sentence Transformer model once and cache it.
+def get_embedding_client() -> genai.Client:
+    """Create and cache the Gemini API client."""
+    if not settings.gemini_api_key:
+        raise ValueError(
+            "GEMINI_API_KEY is not configured. "
+            "Set it in your .env file locally or in Render environment variables."
+        )
 
-    Loading a transformer model is slow (seconds) and memory-heavy, so we
-    only want to do it once per process, not on every request. lru_cache
-    with maxsize=1 gives us a simple singleton without extra boilerplate
-    (no need for a class or global variable management).
-    """
-    logger.info("Loading embedding model: %s", settings.embedding_model)
-    model = SentenceTransformer(settings.embedding_model)
-    logger.info(
-        "Embedding model loaded. Vector dimension: %d",
-        model.get_embedding_dimension()
-    )
-    return model
+    logger.info("Creating Gemini embedding client")
+    return genai.Client(api_key=settings.gemini_api_key)
 
 
 def embed_texts(texts: List[str]) -> np.ndarray:
     """
-    Encode a list of texts into normalized embedding vectors.
+    Convert text into normalized Gemini embedding vectors.
 
-    normalize_embeddings=True makes every vector unit length. This matters
-    because we use a FAISS inner-product index (IndexFlatIP): the inner
-    product of two unit vectors equals their cosine similarity. Without
-    normalization we'd get raw dot products, which are harder to reason
-    about and don't have a fixed, comparable range.
+    The same embedding model and dimensionality are used for both:
+    - FAQ documents
+    - customer queries
 
-    Returns a float32 numpy array of shape (len(texts), embedding_dim),
-    since FAISS requires float32 input.
+    This is required so FAISS similarity search operates in the
+    same vector space.
     """
-    model = get_embedding_model()
-    embeddings = model.encode(
-        texts,
-        normalize_embeddings=True,
-        convert_to_numpy=True,
-        show_progress_bar=False,
+    if not texts:
+        return np.empty((0, embedding_dimension()), dtype="float32")
+
+    client = get_embedding_client()
+
+    result = client.models.embed_content(
+        model=settings.embedding_model,
+        contents=texts,
+        config=types.EmbedContentConfig(
+            output_dimensionality=settings.embedding_dimension,
+        ),
     )
-    return embeddings.astype("float32")
+
+    embeddings = np.array(
+        [embedding.values for embedding in result.embeddings],
+        dtype="float32",
+    )
+
+    # Normalize vectors so FAISS IndexFlatIP behaves like cosine similarity.
+    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    embeddings = embeddings / np.maximum(norms, 1e-12)
+
+    return embeddings
 
 
 def embedding_dimension() -> int:
-    """Return the vector dimension produced by the current embedding model."""
-    return get_embedding_model().get_embedding_dimension()
+    """Return the configured Gemini embedding dimension."""
+    return settings.embedding_dimension

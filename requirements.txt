@@ -7,7 +7,6 @@ scikit-learn
 numpy
 pandas
 
-sentence-transformers
 faiss-cpu
 
 google-genai
