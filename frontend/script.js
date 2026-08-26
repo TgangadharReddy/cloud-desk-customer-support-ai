@@ -20,8 +20,8 @@
 // Same-origin by default when served via serve_with_ui.py (both API and
 // UI on http://127.0.0.1:8000). Written as an absolute URL per the
 // project spec, which also happens to match that same-origin setup.
-const API_URL = "http://127.0.0.1:8000/chat";
-const HEALTH_URL = "http://127.0.0.1:8000/health";
+const API_URL = "/chat";
+const HEALTH_URL = "/health";
 
 const CONNECTION_ERROR_MESSAGE =
   "Unable to connect to CloudDesk Support. Please check that the support service is running and try again.";
