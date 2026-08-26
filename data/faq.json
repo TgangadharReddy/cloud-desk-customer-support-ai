@@ -1,0 +1,542 @@
+[
+  {
+    "id": "billing_001",
+    "category": "Billing",
+    "question": "I was charged twice for my subscription this month.",
+    "answer": "It looks like you may have received a duplicate charge. Please provide the transaction IDs for both charges so our billing team can verify the duplicate and process a refund for the extra charge within 5-7 business days."
+  },
+  {
+    "id": "billing_002",
+    "category": "Billing",
+    "question": "How do I request a refund for my last payment?",
+    "answer": "You can request a refund from Account Settings > Billing > Payment History by selecting the charge and clicking 'Request Refund'. Refunds are reviewed within 2 business days and, if approved, are returned to your original payment method within 5-7 business days."
+  },
+  {
+    "id": "billing_003",
+    "category": "Billing",
+    "question": "What payment methods do you accept?",
+    "answer": "We accept Visa, Mastercard, American Express, and Discover credit/debit cards, as well as PayPal. Bank transfer (ACH) is available on annual Enterprise plans only."
+  },
+  {
+    "id": "billing_004",
+    "category": "Billing",
+    "question": "Can I switch from the monthly plan to the annual plan?",
+    "answer": "Yes. Go to Account Settings > Billing > Subscription and select 'Change Plan'. Switching to annual billing takes effect immediately and you'll receive a prorated credit for the unused portion of your current monthly cycle."
+  },
+  {
+    "id": "billing_005",
+    "category": "Billing",
+    "question": "My payment failed and now my account shows past due.",
+    "answer": "A failed payment is usually caused by an expired card, insufficient funds, or your bank declining the charge. Please update your payment method in Account Settings > Billing > Payment Methods, and we will automatically retry the charge within 24 hours."
+  },
+  {
+    "id": "billing_006",
+    "category": "Billing",
+    "question": "When exactly does my subscription renew each month?",
+    "answer": "Your subscription renews on the same calendar day you originally signed up. You can find your exact next billing date under Account Settings > Billing > Subscription Details."
+  },
+  {
+    "id": "billing_007",
+    "category": "Billing",
+    "question": "How do I cancel my subscription?",
+    "answer": "To cancel, go to Account Settings > Billing > Subscription and click 'Cancel Subscription'. You will retain access until the end of your current billing period, and no further charges will be made."
+  },
+  {
+    "id": "billing_008",
+    "category": "Billing",
+    "question": "Can I get an invoice or receipt for my last payment?",
+    "answer": "Yes. All invoices and receipts are available under Account Settings > Billing > Payment History. Click 'Download Invoice' next to any past charge to get a PDF copy."
+  },
+  {
+    "id": "billing_009",
+    "category": "Billing",
+    "question": "I upgraded my plan mid-cycle, why was I charged an extra amount?",
+    "answer": "When you upgrade mid-cycle, we charge a prorated amount for the remaining days in your current billing period at the new plan's rate. Your next full billing cycle will then be charged at the standard new-plan rate."
+  },
+  {
+    "id": "billing_010",
+    "category": "Billing",
+    "question": "Do you offer discounts for nonprofits or students?",
+    "answer": "Yes, we offer a 20% discount for verified nonprofit organizations and a 15% discount for students with a valid .edu email address. Apply by submitting a verification request under Account Settings > Billing > Discounts."
+  },
+  {
+    "id": "technical_001",
+    "category": "Technical",
+    "question": "I am getting a 500 error when I try to log in.",
+    "answer": "A 500 error usually indicates a temporary server-side issue. Please clear your browser cache, try again in a few minutes, and if the error persists, note the exact time it occurred and contact support so we can check the server logs."
+  },
+  {
+    "id": "technical_002",
+    "category": "Technical",
+    "question": "The dashboard keeps freezing and won't load my data.",
+    "answer": "This is often caused by a large cached dataset or an outdated browser session. Try clearing your browser cache and cookies, then reload the dashboard. If it still freezes, try a different browser to isolate whether it's a local or account-side issue."
+  },
+  {
+    "id": "technical_003",
+    "category": "Technical",
+    "question": "Is the platform currently experiencing an outage?",
+    "answer": "You can check real-time platform status, including any active incidents or scheduled maintenance, at status.clouddesk.example. If an outage is confirmed there, no further action is needed on your end — service will resume automatically."
+  },
+  {
+    "id": "technical_004",
+    "category": "Technical",
+    "question": "My API requests are returning a 401 unauthorized error.",
+    "answer": "A 401 error means your API key is missing, invalid, or expired. Verify you're sending the key in the Authorization header as 'Bearer YOUR_KEY', and check that the key hasn't been revoked under Developer Settings > API Keys."
+  },
+  {
+    "id": "technical_005",
+    "category": "Technical",
+    "question": "I keep getting a 429 too many requests error from the API.",
+    "answer": "A 429 error means you've exceeded the API rate limit for your plan. Please implement exponential backoff between retries, or upgrade to a higher plan tier for increased rate limits under Account Settings > Billing."
+  },
+  {
+    "id": "technical_006",
+    "category": "Technical",
+    "question": "File uploads keep failing or timing out.",
+    "answer": "Upload failures are usually caused by files exceeding the 50MB size limit or an unstable network connection. Try compressing the file or switching networks. If uploads under the size limit still fail, please note the file type and size when contacting support."
+  },
+  {
+    "id": "technical_007",
+    "category": "Technical",
+    "question": "Why is the application running so slowly today?",
+    "answer": "Slow performance can be caused by high traffic on our servers, a large amount of data being loaded on your account, or local network issues. Check status.clouddesk.example for known performance incidents, and try clearing your browser cache."
+  },
+  {
+    "id": "technical_008",
+    "category": "Technical",
+    "question": "My integration with Slack stopped sending notifications.",
+    "answer": "Slack integrations can disconnect if the authorization token expires or workspace permissions change. Go to Integrations > Slack and click 'Reconnect' to re-authorize the connection and restore notifications."
+  },
+  {
+    "id": "technical_009",
+    "category": "Technical",
+    "question": "I'm seeing a blank white screen after the app loads.",
+    "answer": "A blank white screen is typically caused by a JavaScript error from an outdated browser or a conflicting browser extension. Try disabling browser extensions, updating to the latest browser version, or testing in an incognito/private window."
+  },
+  {
+    "id": "technical_010",
+    "category": "Technical",
+    "question": "Exported reports are missing data compared to the dashboard.",
+    "answer": "Exports respect any active filters and date ranges applied on the dashboard at the time of export. Please double-check your filter settings before exporting, or clear all filters to export the complete dataset."
+  },
+  {
+    "id": "account_001",
+    "category": "Account Access",
+    "question": "I forgot my password. How can I reset it?",
+    "answer": "Click 'Forgot Password' on the login page and enter your registered email address. You'll receive a password reset link within a few minutes that is valid for 30 minutes."
+  },
+  {
+    "id": "account_002",
+    "category": "Account Access",
+    "question": "My account has been locked after too many failed login attempts.",
+    "answer": "Accounts are temporarily locked for 30 minutes after 5 failed login attempts as a security measure. You can wait for the lock to expire, or reset your password immediately to regain access right away."
+  },
+  {
+    "id": "account_003",
+    "category": "Account Access",
+    "question": "How do I change the email address associated with my account?",
+    "answer": "Go to Account Settings > Profile > Email Address, enter your new email, and confirm the change via the verification link sent to your new address. Your login email will update once verified."
+  },
+  {
+    "id": "account_004",
+    "category": "Account Access",
+    "question": "How can I enable two-factor authentication on my account?",
+    "answer": "Go to Account Settings > Security > Two-Factor Authentication and click 'Enable'. Scan the QR code with an authenticator app like Google Authenticator or Authy, then enter the generated code to confirm setup."
+  },
+  {
+    "id": "account_005",
+    "category": "Account Access",
+    "question": "I'm not receiving the password reset email.",
+    "answer": "First check your spam or junk folder, as reset emails can sometimes be filtered there. If it's still missing after 10 minutes, confirm you're using the exact email address on file, then request a new reset link."
+  },
+  {
+    "id": "account_006",
+    "category": "Account Access",
+    "question": "How do I change my account password?",
+    "answer": "Go to Account Settings > Security > Password, enter your current password, then enter and confirm your new password. For security, you'll be logged out of all other active sessions after changing it."
+  },
+  {
+    "id": "account_007",
+    "category": "Account Access",
+    "question": "I lost access to my two-factor authentication device.",
+    "answer": "If you saved your backup codes when setting up two-factor authentication, use one of those codes to log in and then re-configure a new device under Account Settings > Security. If you don't have backup codes, contact support to verify your identity and disable two-factor authentication."
+  },
+  {
+    "id": "account_008",
+    "category": "Account Access",
+    "question": "Can I have multiple users logged into the same account at once?",
+    "answer": "Individual accounts support one active session per user by default, but Team and Enterprise plans allow multiple team members to each have their own linked login under a shared workspace. Go to Account Settings > Team to invite additional members."
+  },
+  {
+    "id": "account_009",
+    "category": "Account Access",
+    "question": "How do I delete my account permanently?",
+    "answer": "Go to Account Settings > Privacy > Delete Account. This action is irreversible and permanently removes all your data after a 14-day grace period, during which you can cancel the deletion by logging back in."
+  },
+  {
+    "id": "account_010",
+    "category": "Account Access",
+    "question": "I'm logged in but getting 'access denied' on certain pages.",
+    "answer": "This usually means your account role doesn't have permission for that section. Ask your workspace administrator to review your role and permissions under Account Settings > Team > Roles, or contact support if you believe this is an error."
+  },
+  {
+    "id": "billing_011",
+    "category": "Billing",
+    "question": "Why was my account charged twice for the same subscription?",
+    "answer": "If you were charged twice for the same subscription, compare both transaction IDs in Account Settings > Billing > Payment History. If they are duplicate charges, submit the transaction details to the billing team so the extra charge can be reviewed for a refund."
+  },
+  {
+    "id": "billing_012",
+    "category": "Billing",
+    "question": "I see an unexpected charge on my account.",
+    "answer": "Open Account Settings > Billing > Payment History and compare the charge with your recent invoices. If you still do not recognize it, provide the transaction ID and charge date to the billing team for review."
+  },
+  {
+    "id": "billing_013",
+    "category": "Billing",
+    "question": "The payment for my subscription did not go through.",
+    "answer": "Check Account Settings > Billing > Payment Methods to make sure the card is valid and has sufficient funds. If the payment still fails, the billing team can review the failed transaction."
+  },
+  {
+    "id": "billing_014",
+    "category": "Billing",
+    "question": "My account was billed the wrong amount.",
+    "answer": "Compare the charged amount with the invoice in Account Settings > Billing > Payment History. If the amount is incorrect, provide the invoice or transaction ID to the billing team so they can investigate."
+  },
+  {
+    "id": "billing_015",
+    "category": "Billing",
+    "question": "Why did my subscription payment increase this month?",
+    "answer": "Check your latest invoice for a plan upgrade, prorated charge, discount change, or other additional item. If the increase is not explained by the invoice, provide the transaction details to the billing team for review."
+  },
+  {
+    "id": "billing_016",
+    "category": "Billing",
+    "question": "I need a refund for a payment I made.",
+    "answer": "Go to Account Settings > Billing > Payment History, select the payment, and use the available refund option. Refund requests are reviewed by the billing team and approved refunds are returned to the original payment method."
+  },
+  {
+    "id": "billing_017",
+    "category": "Billing",
+    "question": "My payment was declined when I tried to renew my subscription.",
+    "answer": "Check Account Settings > Billing > Payment Methods and confirm that the card is valid and has sufficient funds. If the renewal continues to be declined, provide the transaction details to the billing team."
+  },
+  {
+    "id": "billing_018",
+    "category": "Billing",
+    "question": "Where can I find my subscription invoice?",
+    "answer": "Go to Account Settings > Billing > Payment History and select the relevant subscription payment to download its invoice. If the invoice is not available, contact the billing team."
+  },
+  {
+    "id": "billing_019",
+    "category": "Billing",
+    "question": "I was billed after I cancelled my subscription.",
+    "answer": "Check the cancellation date under Account Settings > Billing > Subscription and compare it with the charge date in Payment History. If the charge occurred after cancellation, provide both details to the billing team for review."
+  },
+  {
+    "id": "billing_020",
+    "category": "Billing",
+    "question": "Why did I receive a charge after changing my subscription plan?",
+    "answer": "A plan change can create a prorated charge for the remainder of the current billing period. Check Account Settings > Billing > Payment History and compare the charge with your plan-change date."
+  },
+  {
+    "id": "billing_021",
+    "category": "Billing",
+    "question": "My card was charged but my subscription still shows as unpaid.",
+    "answer": "Check Account Settings > Billing > Payment History to confirm whether the payment succeeded. If the card was charged but the subscription still shows unpaid, provide the transaction ID to the billing team so they can verify the payment."
+  },
+  {
+    "id": "billing_022",
+    "category": "Billing",
+    "question": "Can I change the payment method for my subscription?",
+    "answer": "Go to Account Settings > Billing > Payment Methods and select the option to update your payment method. Save the new method before the next subscription renewal."
+  },
+  {
+    "id": "billing_023",
+    "category": "Billing",
+    "question": "I don't recognize a subscription charge on my account.",
+    "answer": "Review Account Settings > Billing > Payment History for the charge and compare it with your subscription details. If you still do not recognize it, provide the transaction ID and charge date to the billing team."
+  },
+  {
+    "id": "billing_024",
+    "category": "Billing",
+    "question": "When will my subscription renewal payment be charged?",
+    "answer": "Your renewal date is based on your subscription cycle. You can find the next billing date under Account Settings > Billing > Subscription Details."
+  },
+  {
+    "id": "billing_025",
+    "category": "Billing",
+    "question": "My account shows a past-due payment even though I already paid.",
+    "answer": "Check Account Settings > Billing > Payment History to confirm that the payment succeeded. If the payment was successful but the account remains past due, provide the transaction ID to the billing team for review."
+  },
+  {
+    "id": "technical_011",
+    "category": "Technical",
+    "question": "The application keeps showing an error when I open the dashboard.",
+    "answer": "Please provide the error details and the steps that caused the issue so the technical team can investigate."
+  },
+  {
+    "id": "technical_012",
+    "category": "Technical",
+    "question": "The dashboard is not loading correctly.",
+    "answer": "Please try refreshing the dashboard. If the problem continues, provide the error details so the technical team can investigate."
+  },
+  {
+    "id": "technical_013",
+    "category": "Technical",
+    "question": "I keep getting a server error while using the application.",
+    "answer": "Please provide the error message and the action that triggered it so the technical team can investigate the server issue."
+  },
+  {
+    "id": "technical_014",
+    "category": "Technical",
+    "question": "The API is returning an unauthorized error.",
+    "answer": "Please verify the API credentials and request configuration. If the issue continues, the technical team can investigate the API error."
+  },
+  {
+    "id": "technical_015",
+    "category": "Technical",
+    "question": "I am receiving too many requests errors from the API.",
+    "answer": "A too-many-requests error can occur when the API rate limit is exceeded. Please reduce the request frequency and try again."
+  },
+  {
+    "id": "technical_016",
+    "category": "Technical",
+    "question": "My file upload keeps failing.",
+    "answer": "Please check the file format and size and try the upload again. If it continues to fail, provide the error message to the technical team."
+  },
+  {
+    "id": "technical_017",
+    "category": "Technical",
+    "question": "The application has become very slow.",
+    "answer": "Please provide details about which part of the application is slow and when the issue occurs so the technical team can investigate the performance problem."
+  },
+  {
+    "id": "technical_018",
+    "category": "Technical",
+    "question": "The screen is completely blank after I log into the application.",
+    "answer": "Please refresh the application and try again. If the blank screen continues, provide the browser and error details to the technical team."
+  },
+  {
+    "id": "technical_019",
+    "category": "Technical",
+    "question": "The application crashes when I try to export data.",
+    "answer": "Please provide the export details and any error message shown when the application crashes so the technical team can investigate."
+  },
+  {
+    "id": "technical_020",
+    "category": "Technical",
+    "question": "My exported report contains incorrect data.",
+    "answer": "Please provide details about the expected and exported data so the technical team can investigate the export issue."
+  },
+  {
+    "id": "technical_021",
+    "category": "Technical",
+    "question": "The Slack integration is no longer working.",
+    "answer": "Please provide the integration error details and when the problem started so the technical team can investigate the integration."
+  },
+  {
+    "id": "technical_022",
+    "category": "Technical",
+    "question": "The website is not responding when I click a button.",
+    "answer": "Please provide the affected page and the action that causes the problem so the technical team can investigate."
+  },
+  {
+    "id": "technical_023",
+    "category": "Technical",
+    "question": "I am getting a 500 server error when using the application.",
+    "answer": "A 500 error indicates a server-side problem. Please provide the action that triggered the error so the technical team can investigate."
+  },
+  {
+    "id": "technical_024",
+    "category": "Technical",
+    "question": "The application keeps timing out when I make a request.",
+    "answer": "Please provide the request details and when the timeout occurs so the technical team can investigate the performance or server issue."
+  },
+  {
+    "id": "technical_025",
+    "category": "Technical",
+    "question": "An application feature stopped working after an update.",
+    "answer": "Please describe the affected feature and the behavior you are seeing so the technical team can investigate the issue."
+  },
+  {
+    "id": "account_011",
+    "category": "Account Access",
+    "question": "I cannot log in to my account.",
+    "answer": "Please verify your login credentials and try again. If you still cannot sign in, follow the available account recovery or password reset process."
+  },
+  {
+    "id": "account_012",
+    "category": "Account Access",
+    "question": "My login is not working.",
+    "answer": "Please verify your username and password and try signing in again. If the problem continues, use the account recovery process."
+  },
+  {
+    "id": "account_013",
+    "category": "Account Access",
+    "question": "I am locked out and cannot sign in.",
+    "answer": "Your account may have been temporarily locked after multiple unsuccessful login attempts. Please follow the account recovery process or contact support."
+  },
+  {
+    "id": "account_014",
+    "category": "Account Access",
+    "question": "I cannot access my profile.",
+    "answer": "Please verify that you are using the correct login credentials. If access is still denied, the support team can help review your account access."
+  },
+  {
+    "id": "account_015",
+    "category": "Account Access",
+    "question": "I need help recovering my account.",
+    "answer": "Please use the available account recovery process. If you cannot complete the recovery process, contact the support team for assistance."
+  },
+  {
+    "id": "account_016",
+    "category": "Account Access",
+    "question": "My sign-in credentials are not working.",
+    "answer": "Please verify your username and password and try again. If you have forgotten your password, use the password reset process."
+  },
+  {
+    "id": "account_017",
+    "category": "Account Access",
+    "question": "I cannot remember my login password.",
+    "answer": "Use the password reset process to create a new password. If you do not receive the reset email, contact support."
+  },
+  {
+    "id": "account_018",
+    "category": "Account Access",
+    "question": "I am unable to sign into my account after changing my password.",
+    "answer": "Please make sure you are using the newly created password and try signing in again. If the problem continues, contact support."
+  },
+  {
+    "id": "account_019",
+    "category": "Account Access",
+    "question": "I lost access to my authentication device.",
+    "answer": "If you no longer have access to your authentication device, contact the support team for help recovering access to your account."
+  },
+  {
+    "id": "account_020",
+    "category": "Account Access",
+    "question": "I need to update the email address used to sign in.",
+    "answer": "You can update your account email through the available account settings. If you cannot access those settings, contact support."
+  },
+  {
+    "id": "account_021",
+    "category": "Account Access",
+    "question": "Why am I being denied access to a page?",
+    "answer": "The page may require permissions that are not currently available to your account. Please contact support if you believe you should have access."
+  },
+  {
+    "id": "account_022",
+    "category": "Account Access",
+    "question": "I cannot complete the password reset process.",
+    "answer": "Please verify that you are using the correct reset link. If the problem continues, contact support for assistance."
+  },
+  {
+    "id": "account_023",
+    "category": "Account Access",
+    "question": "How can I enable two-factor authentication?",
+    "answer": "Two-factor authentication can be enabled through the available security settings for your account."
+  },
+  {
+    "id": "account_024",
+    "category": "Account Access",
+    "question": "I am having trouble signing into my account from a new device.",
+    "answer": "Please verify your login credentials and complete any required security verification. If you still cannot sign in, contact support."
+  },
+  {
+    "id": "account_025",
+    "category": "Account Access",
+    "question": "I cannot access my account even though I know my password.",
+    "answer": "Please verify that your login details are correct and check whether your account has been locked or restricted. Contact support if you still cannot access it."
+  },
+  {
+    "id": "technical_026",
+    "category": "Technical",
+    "question": "The dashboard freezes whenever I try to open my account data.",
+    "answer": "The dashboard may be experiencing a temporary technical issue. Please refresh the page and try again. If the problem continues, our technical support team can investigate further."
+  },
+  {
+    "id": "technical_027",
+    "category": "Technical",
+    "question": "I get a 500 internal server error when trying to sign in.",
+    "answer": "A 500 error usually indicates a server-side problem. Please try again after a few minutes. If the issue continues, our technical support team can investigate the server error."
+  },
+  {
+    "id": "technical_028",
+    "category": "Technical",
+    "question": "The application becomes unresponsive and stops responding to my clicks.",
+    "answer": "The application may be experiencing a temporary performance issue. Please refresh the page and try again. If it remains unresponsive, our technical support team can investigate."
+  },
+  {
+    "id": "technical_029",
+    "category": "Technical",
+    "question": "The website keeps timing out whenever I try to load a page.",
+    "answer": "The timeout may be caused by a temporary application or server issue. Please try again after a short while. If the problem persists, our technical support team can investigate."
+  },
+  {
+    "id": "technical_030",
+    "category": "Technical",
+    "question": "I cannot upload my file because the upload keeps failing.",
+    "answer": "The upload may be failing because of a temporary application issue. Please try the upload again. If it continues to fail, our technical support team can investigate the upload problem."
+  },
+  {
+    "id": "technical_031",
+    "category": "Technical",
+    "question": "My dashboard is extremely slow and keeps freezing.",
+    "answer": "This is often caused by a large cached dataset or an outdated browser session. Try clearing your browser cache and cookies, then reload the dashboard. If it still freezes, try a different browser to isolate whether it is a local or account-side issue."
+  },
+  {
+    "id": "technical_032",
+    "category": "Technical",
+    "question": "The dashboard becomes unresponsive while I am working with data.",
+    "answer": "A large dataset or stale browser session can make the dashboard unresponsive. Clear your browser cache and cookies, reload the dashboard, and try a different browser if the issue continues."
+  },
+  {
+    "id": "technical_033",
+    "category": "Technical",
+    "question": "My dashboard takes a long time to load and then stops responding.",
+    "answer": "Try clearing your browser cache and cookies before reloading the dashboard. If it remains slow or unresponsive, test the dashboard in another browser to determine whether the problem is local to your browser."
+  },
+  {
+    "id": "technical_034",
+    "category": "Technical",
+    "question": "The dashboard is stuck whenever I open a large dataset.",
+    "answer": "Large datasets can increase dashboard load time and cause the page to become unresponsive. Try clearing the browser cache, reloading the dashboard, and testing with a different browser if necessary."
+  },
+  {
+    "id": "technical_035",
+    "category": "Technical",
+    "question": "The dashboard keeps hanging and I cannot click anything.",
+    "answer": "Please refresh the dashboard after clearing your browser cache and cookies. If the page still hangs, try an incognito/private window or another browser to check whether a local browser session is causing the problem."
+  },
+  {
+  "id": "account_026",
+  "category": "Account Access",
+  "question": "How do I reset my password if I forgot it?",
+  "answer": "Select the Forgot Password option on the sign-in page and follow the instructions sent to your registered email address. If you do not receive the email, check your spam folder."
+  },
+  {
+  "id": "account_027",
+  "category": "Account Access",
+  "question": "I cannot remember my password and need to regain access.",
+  "answer": "Use the Forgot Password option on the sign-in page to reset your password. Follow the reset instructions sent to your registered email address."
+  },
+  {
+  "id": "account_028",
+  "category": "Account Access",
+  "question": "What should I do if I forgot my login password?",
+  "answer": "Click Forgot Password on the sign-in page and follow the password-reset instructions sent to your registered email address."
+  },
+  {
+  "id": "account_029",
+  "category": "Account Access",
+  "question": "Can I reset my password from the login page?",
+  "answer": "Yes. Select Forgot Password on the login page and follow the instructions sent to your registered email address to create a new password."
+  },
+  {
+  "id": "account_030",
+  "category": "Account Access",
+  "question": "I lost my password. How can I get back into my account?",
+  "answer": "Use the Forgot Password option on the sign-in page. Complete the reset process using the instructions sent to your registered email address."
+  }
+]
