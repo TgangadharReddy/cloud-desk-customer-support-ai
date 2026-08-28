@@ -72,20 +72,29 @@ def fake_settings(monkeypatch):
 
 
 def test_build_prompt_includes_customer_query(sample_faqs):
-    prompt = build_prompt("I was charged twice.", sample_faqs)
+    prompt = build_prompt(
+        "I was charged twice.",
+        sample_faqs,
+    )
 
     assert "I was charged twice." in prompt
 
 
 def test_build_prompt_includes_retrieved_faq_content(sample_faqs):
-    prompt = build_prompt("I was charged twice.", sample_faqs)
+    prompt = build_prompt(
+        "I was charged twice.",
+        sample_faqs,
+    )
 
     assert sample_faqs[0].question in prompt
     assert sample_faqs[0].answer in prompt
 
 
 def test_build_prompt_instructs_model_to_avoid_hallucination(sample_faqs):
-    prompt = build_prompt("I was charged twice.", sample_faqs)
+    prompt = build_prompt(
+        "I was charged twice.",
+        sample_faqs,
+    )
 
     assert "only" in prompt.lower()
     assert "do not invent" in prompt.lower()
@@ -210,3 +219,82 @@ def test_generate_response_raises_value_error_on_empty_query(sample_faqs):
             "",
             sample_faqs,
         )
+
+
+# ---------------------------------------------------------------------------
+# generate_response: retry handling
+# ---------------------------------------------------------------------------
+
+
+def test_generate_response_retries_on_temporary_503(sample_faqs):
+    """
+    Gemini may temporarily return 503 UNAVAILABLE during periods
+    of high demand. The LLM module should retry and succeed.
+    """
+
+    mock_client = MagicMock()
+
+    mock_client.models.generate_content.side_effect = [
+        RuntimeError("503 UNAVAILABLE: high demand"),
+        SimpleNamespace(
+            text=(
+                "It looks like a duplicate charge. "
+                "Please share both transaction IDs so billing can verify."
+            )
+        ),
+    ]
+
+    with patch(
+        "app.llm.genai.Client",
+        return_value=mock_client,
+    ), patch(
+        "app.llm.time.sleep"
+    ) as mock_sleep:
+
+        result = generate_response(
+            "I was charged twice.",
+            sample_faqs,
+        )
+
+    assert result == (
+        "It looks like a duplicate charge. "
+        "Please share both transaction IDs so billing can verify."
+    )
+
+    assert mock_client.models.generate_content.call_count == 2
+
+    mock_sleep.assert_called_once_with(2)
+
+
+def test_generate_response_retries_up_to_max_attempts_on_503(sample_faqs):
+    """
+    If Gemini remains unavailable, the module should retry the configured
+    number of times and then raise LLMGenerationError.
+    """
+
+    mock_client = MagicMock()
+
+    mock_client.models.generate_content.side_effect = RuntimeError(
+        "503 UNAVAILABLE: high demand"
+    )
+
+    with patch(
+        "app.llm.genai.Client",
+        return_value=mock_client,
+    ), patch(
+        "app.llm.time.sleep"
+    ) as mock_sleep:
+
+        with pytest.raises(LLMGenerationError):
+
+            generate_response(
+                "I was charged twice.",
+                sample_faqs,
+            )
+
+    assert (
+        mock_client.models.generate_content.call_count
+        == llm.MAX_RETRIES
+    )
+
+    assert mock_sleep.call_count == llm.MAX_RETRIES - 1

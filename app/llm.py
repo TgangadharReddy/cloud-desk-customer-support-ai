@@ -6,6 +6,7 @@ documents, then uses Gemini to generate a concise customer-support answer.
 """
 
 import logging
+import time
 from typing import List
 
 from google import genai
@@ -19,6 +20,9 @@ NO_CONTEXT_RESPONSE = (
     "I don't have enough information in the knowledge base to answer "
     "your question. Please contact a support representative for further assistance."
 )
+
+MAX_RETRIES = 3
+RETRY_DELAY_SECONDS = 2
 
 
 class LLMGenerationError(Exception):
@@ -104,6 +108,22 @@ Customer support response:
     return prompt.strip()
 
 
+def _is_retryable_error(exc: Exception) -> bool:
+    """
+    Return True when the Gemini error looks like a temporary
+    service-unavailable / high-demand 503 error.
+    """
+
+    error_text = str(exc).upper()
+
+    return (
+        "503" in error_text
+        or "UNAVAILABLE" in error_text
+        or "HIGH DEMAND" in error_text
+        or "SERVICE UNAVAILABLE" in error_text
+    )
+
+
 def generate_response(
     customer_query: str,
     retrieved_faqs: List[RetrievedFAQ],
@@ -138,15 +158,51 @@ def generate_response(
             settings.gemini_api_key,
         )
 
-        response = model.generate_content(prompt)
+        last_exception = None
 
-        if not response or not getattr(response, "text", None):
-            logger.error("Gemini returned an empty response.")
-            raise LLMGenerationError(
-                "Gemini returned an empty response."
-            )
+        for attempt in range(1, MAX_RETRIES + 1):
+            try:
+                response = model.generate_content(prompt)
 
-        return response.text.strip()
+                if not response or not getattr(response, "text", None):
+                    logger.error("Gemini returned an empty response.")
+                    raise LLMGenerationError(
+                        "Gemini returned an empty response."
+                    )
+
+                return response.text.strip()
+
+            except LLMGenerationError:
+                raise
+
+            except Exception as exc:
+                last_exception = exc
+
+                if not _is_retryable_error(exc):
+                    raise
+
+                if attempt == MAX_RETRIES:
+                    logger.exception(
+                        "Gemini failed after %s attempts: %s",
+                        MAX_RETRIES,
+                        exc,
+                    )
+                    raise
+
+                delay = RETRY_DELAY_SECONDS * attempt
+
+                logger.warning(
+                    "Gemini temporarily unavailable (attempt %s/%s). "
+                    "Retrying in %s seconds: %s",
+                    attempt,
+                    MAX_RETRIES,
+                    delay,
+                    exc,
+                )
+
+                time.sleep(delay)
+
+        raise last_exception
 
     except LLMGenerationError:
         raise
