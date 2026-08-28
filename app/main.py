@@ -51,13 +51,20 @@ from app.config import settings
 from app.escalation import check_escalation
 from app.llm import LLMGenerationError, generate_response
 from app.rag import retrieve_relevant_faqs
-
+from fastapi.middleware.cors import CORSMiddleware
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="CloudDesk Customer Support AI Employee",
     description="Tier-1 support triage: classification + RAG + escalation.",
     version="0.2.0",
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
