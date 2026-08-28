@@ -94,7 +94,7 @@ def load_settings() -> Settings:
         confidence_threshold=_get_float("CONFIDENCE_THRESHOLD", 0.70),
         llm_provider=os.getenv("LLM_PROVIDER", "gemini").strip().lower(),
         gemini_api_key=os.getenv("GEMINI_API_KEY", ""),
-        gemini_model=os.getenv("GEMINI_MODEL", "gemini-1.5-flash"),
+        gemini_model=os.getenv("GEMINI_MODEL", "gemini-2.5-flash"),
         openai_api_key=os.getenv("OPENAI_API_KEY", ""),
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
         host=os.getenv("HOST", "0.0.0.0"),

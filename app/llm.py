@@ -8,22 +8,50 @@ documents, then uses Gemini to generate a concise customer-support answer.
 import logging
 from typing import List
 
-import google.generativeai as genai
+from google import genai
 
 from app.config import settings
 from app.rag import RetrievedFAQ
 
 logger = logging.getLogger(__name__)
 
-
 NO_CONTEXT_RESPONSE = (
     "I don't have enough information in the knowledge base to answer "
-    "this request. Please contact a support representative."
+    "your question. Please contact a support representative for further assistance."
 )
 
 
 class LLMGenerationError(Exception):
-    """Raised when Gemini cannot generate a usable response."""
+    """Raised when Gemini response generation fails."""
+
+
+class _GeminiModelAdapter:
+    """
+    Compatibility adapter.
+
+    The project tests and existing code use the familiar:
+        genai.GenerativeModel(...).generate_content(...)
+
+    The current google-genai SDK uses:
+        genai.Client(...).models.generate_content(...)
+
+    This adapter keeps the old interface while using the new SDK internally.
+    """
+
+    def __init__(self, model_name: str, api_key: str):
+        self.model_name = model_name
+        self.client = genai.Client(api_key=api_key)
+
+    def generate_content(self, prompt: str):
+        return self.client.models.generate_content(
+            model=self.model_name,
+            contents=prompt,
+        )
+
+
+# Preserve a GenerativeModel-compatible entry point so existing tests
+# and project code can continue to mock/use this interface.
+genai.GenerativeModel = _GeminiModelAdapter
 
 
 def build_prompt(
@@ -59,7 +87,6 @@ in the knowledge base below.
 
 Do not invent information.
 Do not make assumptions.
-
 If the knowledge base does not contain enough information to answer
 the question, clearly say that the request needs further assistance.
 
@@ -87,8 +114,8 @@ def generate_response(
     Returns only the generated answer text.
 
     Raises:
-        ValueError: if the customer query is empty.
-        LLMGenerationError: if Gemini cannot generate a usable response.
+        ValueError: If the customer query is empty.
+        LLMGenerationError: If Gemini generation fails.
     """
 
     if not customer_query or not customer_query.strip():
@@ -106,10 +133,9 @@ def generate_response(
     prompt = build_prompt(customer_query, retrieved_faqs)
 
     try:
-        genai.configure(api_key=settings.gemini_api_key)
-
         model = genai.GenerativeModel(
-            settings.gemini_model
+            settings.gemini_model,
+            settings.gemini_api_key,
         )
 
         response = model.generate_content(prompt)
